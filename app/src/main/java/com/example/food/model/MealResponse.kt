@@ -1,13 +1,17 @@
 package com.example.food.model
 
 import com.google.gson.annotations.SerializedName
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 data class MealResponse(
     @SerializedName("meals")
     val meals: List<Meal>?
 )
 
+@Entity(tableName = "meals")
 data class Meal(
+    @PrimaryKey
     @SerializedName("idMeal") val id: String,
     @SerializedName("strMeal") val name: String,
     @SerializedName("strMealThumb") val imageUrl: String,
@@ -15,7 +19,6 @@ data class Meal(
     @SerializedName("strArea") val area: String?,
     @SerializedName("strInstructions") val instructions: String?,
 
-    // --- LES INGRÉDIENTS (C'est moche mais l'API est faite comme ça) ---
     val strIngredient1: String?, val strMeasure1: String?,
     val strIngredient2: String?, val strMeasure2: String?,
     val strIngredient3: String?, val strMeasure3: String?,
@@ -37,12 +40,9 @@ data class Meal(
     val strIngredient19: String?, val strMeasure19: String?,
     val strIngredient20: String?, val strMeasure20: String?
 ) {
-    // Fonction magique pour transformer les 20 champs en une vraie liste propre
     fun getIngredients(): List<Pair<String, String>> {
         val ingredients = mutableListOf<Pair<String, String>>()
 
-        // On vérifie les 20 champs un par un (c'est laborieux mais nécessaire)
-        // On ne garde que ceux qui ne sont pas vides
         if (!strIngredient1.isNullOrBlank()) ingredients.add(strIngredient1 to (strMeasure1 ?: ""))
         if (!strIngredient2.isNullOrBlank()) ingredients.add(strIngredient2 to (strMeasure2 ?: ""))
         if (!strIngredient3.isNullOrBlank()) ingredients.add(strIngredient3 to (strMeasure3 ?: ""))
