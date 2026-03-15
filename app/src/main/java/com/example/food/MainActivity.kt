@@ -104,7 +104,7 @@ fun RecipeScreen(viewModel: MealViewModel, onMealClick: (Meal) -> Unit) {
                 text = "SUPINFOOD",
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.align(Alignment.Center)
+                modifier = Modifier.align(Alignment.CenterStart)
             )
 
             Row(
