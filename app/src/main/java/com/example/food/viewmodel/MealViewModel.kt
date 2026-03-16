@@ -67,7 +67,6 @@ class MealViewModel(application: Application) : AndroidViewModel(application) {
         _isFrench.value = french
     }
 
-    // Tâche de fond pour valider le critère : "Vérifie régulièrement que les données sont à jour"
     private fun startPeriodicDataRefresh() {
         viewModelScope.launch {
             while (true) {
